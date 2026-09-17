@@ -7,14 +7,14 @@ import numpy as np
 # Features: Budget, Spent Ratio, Days Since Start, Contractor Project Count
 
 data = [
-    {'id': 'PRJ-001', 'budget': 15000000, 'spent_ratio': 0.8, 'duration_days': 120, 'vendor_density': 1},
-    {'id': 'PRJ-002', 'budget': 8000000, 'spent_ratio': 1.0, 'duration_days': 45, 'vendor_density': 4}, # Anomaly! Fast completion, high vendor density
-    {'id': 'PRJ-003', 'budget': 5000000, 'spent_ratio': 0.9, 'duration_days': 400, 'vendor_density': 1}, # Anomaly! High spent ratio but extremely delayed
-    {'id': 'PRJ-004', 'budget': 2000000, 'spent_ratio': 0.4, 'duration_days': 60, 'vendor_density': 2},
-    {'id': 'PRJ-005', 'budget': 12000000, 'spent_ratio': 0.95, 'duration_days': 30, 'vendor_density': 4}, # Anomaly! Too fast, high spend
-    {'id': 'PRJ-006', 'budget': 3500000, 'spent_ratio': 0.2, 'duration_days': 30, 'vendor_density': 1},
-    {'id': 'PRJ-007', 'budget': 4500000, 'spent_ratio': 0.5, 'duration_days': 90, 'vendor_density': 2},
-    {'id': 'PRJ-008', 'budget': 9000000, 'spent_ratio': 0.1, 'duration_days': 15, 'vendor_density': 1},
+    {'id': 'PRJ-2023-001', 'budget': 15000000, 'spent_ratio': 0.8, 'duration_days': 120, 'vendor_density': 1},
+    {'id': 'PRJ-2023-002', 'budget': 8000000, 'spent_ratio': 1.0, 'duration_days': 45, 'vendor_density': 4}, # Anomaly! Fast completion, high vendor density
+    {'id': 'PRJ-2023-003', 'budget': 5000000, 'spent_ratio': 0.9, 'duration_days': 400, 'vendor_density': 1}, # Anomaly! High spent ratio but extremely delayed
+    {'id': 'PRJ-2023-004', 'budget': 2000000, 'spent_ratio': 0.4, 'duration_days': 60, 'vendor_density': 2},
+    {'id': 'PRJ-2023-005', 'budget': 12000000, 'spent_ratio': 0.95, 'duration_days': 30, 'vendor_density': 4}, # Anomaly! Too fast, high spend
+    {'id': 'PRJ-2023-006', 'budget': 3500000, 'spent_ratio': 0.2, 'duration_days': 30, 'vendor_density': 1},
+    {'id': 'PRJ-2023-007', 'budget': 4500000, 'spent_ratio': 0.5, 'duration_days': 90, 'vendor_density': 2},
+    {'id': 'PRJ-2023-008', 'budget': 9000000, 'spent_ratio': 0.1, 'duration_days': 15, 'vendor_density': 1},
 ]
 
 df = pd.DataFrame(data)

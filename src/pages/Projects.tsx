@@ -95,7 +95,8 @@ export default function Projects() {
       result = result.filter(p => 
         p.id.toLowerCase().includes(lower) || 
         p.name.toLowerCase().includes(lower) || 
-        p.contractor.toLowerCase().includes(lower)
+        p.contractor.toLowerCase().includes(lower) ||
+        p.state.toLowerCase().includes(lower)
       );
     }
     if (statusFilter) result = result.filter(p => p.status === statusFilter);
@@ -157,7 +158,7 @@ export default function Projects() {
         <div className="relative w-full lg:w-80 flex-shrink-0">
           <Search className="absolute left-2.5 top-2 h-4 w-4 text-text-muted" />
           <Input 
-            placeholder="Search by ID, Name, Contractor..." 
+            placeholder="Search by ID, Name, Contractor, State..." 
             className="pl-8"
             value={searchTerm}
             onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}

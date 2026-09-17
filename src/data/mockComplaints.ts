@@ -24,7 +24,12 @@ export const loadComplaints = async (): Promise<Complaint[]> => {
   try {
     const res = await fetch('https://api.restful-api.dev/objects/ff808181a09d98f701a0a96e9e7918bc');
     const json = await res.json();
-    return json?.data?.complaints || initialComplaints;
+    const serverComplaints = json?.data?.complaints || [];
+    
+    // Filter out dummy test complaints (like '123') that users pushed to the public API
+    const validComplaints = serverComplaints.filter((c: any) => c.id && c.id.startsWith('COMP-'));
+    
+    return validComplaints.length > 0 ? validComplaints : initialComplaints;
   } catch (e) {
     return initialComplaints;
   }

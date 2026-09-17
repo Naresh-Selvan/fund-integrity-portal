@@ -1,3 +1,5 @@
+import { computeRisk, type RiskFactor } from '../lib/riskEngine';
+
 export type ProjectStatus = 'Active' | 'Delayed' | 'Completed' | 'Flagged' | 'Registered';
 
 export interface Project {
@@ -14,6 +16,8 @@ export interface Project {
   contractor: string;
   latitude?: number;
   longitude?: number;
+  coordinates: [number, number];
+  riskScore: number;
 }
 
 export const mockProjects: Project[] = [
@@ -30,7 +34,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "TechVision Suppliers",
     "latitude": 12.1213,
-    "longitude": 87.7341
+    "longitude": 87.7341,
+    "coordinates": [
+      12.1213,
+      87.7341
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-002",
@@ -45,7 +54,12 @@ export const mockProjects: Project[] = [
     "state": "Karnataka",
     "contractor": "TechVision Suppliers",
     "latitude": 13.6328,
-    "longitude": 71.0674
+    "longitude": 71.0674,
+    "coordinates": [
+      13.6328,
+      71.0674
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-003",
@@ -60,7 +74,12 @@ export const mockProjects: Project[] = [
     "state": "Punjab",
     "contractor": "Singh Builders",
     "latitude": 19.9435,
-    "longitude": 85.1099
+    "longitude": 85.1099,
+    "coordinates": [
+      19.9435,
+      85.1099
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-004",
@@ -75,7 +94,12 @@ export const mockProjects: Project[] = [
     "state": "Punjab",
     "contractor": "Surya Infra",
     "latitude": 12.4942,
-    "longitude": 73.7367
+    "longitude": 73.7367,
+    "coordinates": [
+      12.4942,
+      73.7367
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-005",
@@ -90,7 +114,12 @@ export const mockProjects: Project[] = [
     "state": "Gujarat",
     "contractor": "L&T Local",
     "latitude": 11.1787,
-    "longitude": 70.9148
+    "longitude": 70.9148,
+    "coordinates": [
+      11.1787,
+      70.9148
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-006",
@@ -105,7 +134,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "KV Constructions",
     "latitude": 13.1263,
-    "longitude": 81.0245
+    "longitude": 81.0245,
+    "coordinates": [
+      13.1263,
+      81.0245
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-007",
@@ -120,7 +154,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 13.5788,
-    "longitude": 72.5985
+    "longitude": 72.5985,
+    "coordinates": [
+      13.5788,
+      72.5985
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-008",
@@ -135,7 +174,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "KV Constructions",
     "latitude": 29.4523,
-    "longitude": 86.6148
+    "longitude": 86.6148,
+    "coordinates": [
+      29.4523,
+      86.6148
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-009",
@@ -150,7 +194,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "National Builders",
     "latitude": 8.3524,
-    "longitude": 71.8184
+    "longitude": 71.8184,
+    "coordinates": [
+      8.3524,
+      71.8184
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-010",
@@ -165,7 +214,12 @@ export const mockProjects: Project[] = [
     "state": "Andhra Pradesh",
     "contractor": "National Builders",
     "latitude": 24.5535,
-    "longitude": 88.0218
+    "longitude": 88.0218,
+    "coordinates": [
+      24.5535,
+      88.0218
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-011",
@@ -180,7 +234,12 @@ export const mockProjects: Project[] = [
     "state": "Punjab",
     "contractor": "Singh Builders",
     "latitude": 25.6527,
-    "longitude": 80.0378
+    "longitude": 80.0378,
+    "coordinates": [
+      25.6527,
+      80.0378
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-012",
@@ -195,7 +254,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "Surya Infra",
     "latitude": 18.4331,
-    "longitude": 70.1999
+    "longitude": 70.1999,
+    "coordinates": [
+      18.4331,
+      70.1999
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-013",
@@ -210,7 +274,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "Reddy & Sons",
     "latitude": 22.499,
-    "longitude": 89.8511
+    "longitude": 89.8511,
+    "coordinates": [
+      22.499,
+      89.8511
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-014",
@@ -225,7 +294,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 23.4188,
-    "longitude": 77.0611
+    "longitude": 77.0611,
+    "coordinates": [
+      23.4188,
+      77.0611
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-015",
@@ -240,7 +314,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "Reddy & Sons",
     "latitude": 11.3234,
-    "longitude": 84.5426
+    "longitude": 84.5426,
+    "coordinates": [
+      11.3234,
+      84.5426
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-016",
@@ -255,7 +334,12 @@ export const mockProjects: Project[] = [
     "state": "Karnataka",
     "contractor": "Reddy & Sons",
     "latitude": 8.6219,
-    "longitude": 85.1243
+    "longitude": 85.1243,
+    "coordinates": [
+      8.6219,
+      85.1243
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-017",
@@ -270,7 +354,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "National Builders",
     "latitude": 23.1893,
-    "longitude": 70.8636
+    "longitude": 70.8636,
+    "coordinates": [
+      23.1893,
+      70.8636
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-018",
@@ -285,7 +374,12 @@ export const mockProjects: Project[] = [
     "state": "Andhra Pradesh",
     "contractor": "L&T Local",
     "latitude": 27.5864,
-    "longitude": 87.6431
+    "longitude": 87.6431,
+    "coordinates": [
+      27.5864,
+      87.6431
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-019",
@@ -300,7 +394,12 @@ export const mockProjects: Project[] = [
     "state": "Andhra Pradesh",
     "contractor": "L&T Local",
     "latitude": 21.2117,
-    "longitude": 77.7827
+    "longitude": 77.7827,
+    "coordinates": [
+      21.2117,
+      77.7827
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-020",
@@ -315,7 +414,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "TechVision Suppliers",
     "latitude": 19.935,
-    "longitude": 79.8441
+    "longitude": 79.8441,
+    "coordinates": [
+      19.935,
+      79.8441
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-021",
@@ -330,7 +434,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 13.9056,
-    "longitude": 72.1341
+    "longitude": 72.1341,
+    "coordinates": [
+      13.9056,
+      72.1341
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-022",
@@ -345,7 +454,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "L&T Local",
     "latitude": 28.1302,
-    "longitude": 81.0113
+    "longitude": 81.0113,
+    "coordinates": [
+      28.1302,
+      81.0113
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-023",
@@ -360,7 +474,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "Apex Contractors",
     "latitude": 26.0122,
-    "longitude": 88.7848
+    "longitude": 88.7848,
+    "coordinates": [
+      26.0122,
+      88.7848
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-024",
@@ -375,7 +494,12 @@ export const mockProjects: Project[] = [
     "state": "Karnataka",
     "contractor": "Singh Builders",
     "latitude": 26.0519,
-    "longitude": 73.051
+    "longitude": 73.051,
+    "coordinates": [
+      26.0519,
+      73.051
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-025",
@@ -390,7 +514,12 @@ export const mockProjects: Project[] = [
     "state": "Karnataka",
     "contractor": "Singh Builders",
     "latitude": 17.5572,
-    "longitude": 75.9232
+    "longitude": 75.9232,
+    "coordinates": [
+      17.5572,
+      75.9232
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-026",
@@ -405,7 +534,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "National Builders",
     "latitude": 18.9759,
-    "longitude": 88.3571
+    "longitude": 88.3571,
+    "coordinates": [
+      18.9759,
+      88.3571
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-027",
@@ -420,7 +554,12 @@ export const mockProjects: Project[] = [
     "state": "Punjab",
     "contractor": "Surya Infra",
     "latitude": 18.7728,
-    "longitude": 71.7849
+    "longitude": 71.7849,
+    "coordinates": [
+      18.7728,
+      71.7849
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-028",
@@ -435,7 +574,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 12.9159,
-    "longitude": 81.1208
+    "longitude": 81.1208,
+    "coordinates": [
+      12.9159,
+      81.1208
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-029",
@@ -450,7 +594,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Reddy & Sons",
     "latitude": 18.7883,
-    "longitude": 73.9368
+    "longitude": 73.9368,
+    "coordinates": [
+      18.7883,
+      73.9368
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-030",
@@ -465,7 +614,12 @@ export const mockProjects: Project[] = [
     "state": "Punjab",
     "contractor": "TechVision Suppliers",
     "latitude": 8.8933,
-    "longitude": 80.4168
+    "longitude": 80.4168,
+    "coordinates": [
+      8.8933,
+      80.4168
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-031",
@@ -480,7 +634,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Apex Contractors",
     "latitude": 8.9668,
-    "longitude": 79.8353
+    "longitude": 79.8353,
+    "coordinates": [
+      8.9668,
+      79.8353
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-032",
@@ -495,7 +654,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Reddy & Sons",
     "latitude": 27.1663,
-    "longitude": 78.1301
+    "longitude": 78.1301,
+    "coordinates": [
+      27.1663,
+      78.1301
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-033",
@@ -510,7 +674,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "Singh Builders",
     "latitude": 12.187,
-    "longitude": 89.2457
+    "longitude": 89.2457,
+    "coordinates": [
+      12.187,
+      89.2457
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-034",
@@ -525,7 +694,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "KV Constructions",
     "latitude": 21.1474,
-    "longitude": 85.3363
+    "longitude": 85.3363,
+    "coordinates": [
+      21.1474,
+      85.3363
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-035",
@@ -540,7 +714,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 12.5717,
-    "longitude": 82.8893
+    "longitude": 82.8893,
+    "coordinates": [
+      12.5717,
+      82.8893
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-036",
@@ -555,7 +734,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Reddy & Sons",
     "latitude": 28.4764,
-    "longitude": 78.341
+    "longitude": 78.341,
+    "coordinates": [
+      28.4764,
+      78.341
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-037",
@@ -570,7 +754,12 @@ export const mockProjects: Project[] = [
     "state": "Gujarat",
     "contractor": "Singh Builders",
     "latitude": 9.2912,
-    "longitude": 78.8017
+    "longitude": 78.8017,
+    "coordinates": [
+      9.2912,
+      78.8017
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-038",
@@ -585,7 +774,12 @@ export const mockProjects: Project[] = [
     "state": "Andhra Pradesh",
     "contractor": "Singh Builders",
     "latitude": 12.3421,
-    "longitude": 84.7895
+    "longitude": 84.7895,
+    "coordinates": [
+      12.3421,
+      84.7895
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-039",
@@ -600,7 +794,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "Surya Infra",
     "latitude": 16.3699,
-    "longitude": 87.4071
+    "longitude": 87.4071,
+    "coordinates": [
+      16.3699,
+      87.4071
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-040",
@@ -615,7 +814,12 @@ export const mockProjects: Project[] = [
     "state": "Punjab",
     "contractor": "Singh Builders",
     "latitude": 22.201,
-    "longitude": 88.3285
+    "longitude": 88.3285,
+    "coordinates": [
+      22.201,
+      88.3285
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-041",
@@ -630,7 +834,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "KV Constructions",
     "latitude": 10.311,
-    "longitude": 73.9868
+    "longitude": 73.9868,
+    "coordinates": [
+      10.311,
+      73.9868
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-042",
@@ -645,7 +854,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 28.0723,
-    "longitude": 77.8897
+    "longitude": 77.8897,
+    "coordinates": [
+      28.0723,
+      77.8897
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-043",
@@ -660,7 +874,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "National Builders",
     "latitude": 29.5236,
-    "longitude": 80.9563
+    "longitude": 80.9563,
+    "coordinates": [
+      29.5236,
+      80.9563
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-044",
@@ -675,7 +894,12 @@ export const mockProjects: Project[] = [
     "state": "Gujarat",
     "contractor": "Reddy & Sons",
     "latitude": 18.451,
-    "longitude": 79.5607
+    "longitude": 79.5607,
+    "coordinates": [
+      18.451,
+      79.5607
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-045",
@@ -690,7 +914,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "Reddy & Sons",
     "latitude": 14.5771,
-    "longitude": 87.0706
+    "longitude": 87.0706,
+    "coordinates": [
+      14.5771,
+      87.0706
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-046",
@@ -705,7 +934,12 @@ export const mockProjects: Project[] = [
     "state": "Karnataka",
     "contractor": "Surya Infra",
     "latitude": 29.8382,
-    "longitude": 86.3666
+    "longitude": 86.3666,
+    "coordinates": [
+      29.8382,
+      86.3666
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-047",
@@ -720,7 +954,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Singh Builders",
     "latitude": 23.1752,
-    "longitude": 74.8218
+    "longitude": 74.8218,
+    "coordinates": [
+      23.1752,
+      74.8218
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-048",
@@ -735,7 +974,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "National Builders",
     "latitude": 24.8006,
-    "longitude": 86.5897
+    "longitude": 86.5897,
+    "coordinates": [
+      24.8006,
+      86.5897
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-049",
@@ -750,7 +994,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 10.0142,
-    "longitude": 79.2367
+    "longitude": 79.2367,
+    "coordinates": [
+      10.0142,
+      79.2367
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-050",
@@ -765,7 +1014,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "TechVision Suppliers",
     "latitude": 17.0529,
-    "longitude": 73.3853
+    "longitude": 73.3853,
+    "coordinates": [
+      17.0529,
+      73.3853
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-051",
@@ -780,7 +1034,12 @@ export const mockProjects: Project[] = [
     "state": "Karnataka",
     "contractor": "Reddy & Sons",
     "latitude": 10.8718,
-    "longitude": 81.7404
+    "longitude": 81.7404,
+    "coordinates": [
+      10.8718,
+      81.7404
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-052",
@@ -795,7 +1054,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "Surya Infra",
     "latitude": 24.8555,
-    "longitude": 78.4327
+    "longitude": 78.4327,
+    "coordinates": [
+      24.8555,
+      78.4327
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-053",
@@ -810,7 +1074,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "KV Constructions",
     "latitude": 16.7989,
-    "longitude": 88.627
+    "longitude": 88.627,
+    "coordinates": [
+      16.7989,
+      88.627
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-054",
@@ -825,7 +1094,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "National Builders",
     "latitude": 16.9894,
-    "longitude": 70.9993
+    "longitude": 70.9993,
+    "coordinates": [
+      16.9894,
+      70.9993
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-055",
@@ -840,7 +1114,12 @@ export const mockProjects: Project[] = [
     "state": "Karnataka",
     "contractor": "Surya Infra",
     "latitude": 18.2756,
-    "longitude": 88.1291
+    "longitude": 88.1291,
+    "coordinates": [
+      18.2756,
+      88.1291
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-056",
@@ -855,7 +1134,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 8.6504,
-    "longitude": 72.2367
+    "longitude": 72.2367,
+    "coordinates": [
+      8.6504,
+      72.2367
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-057",
@@ -870,7 +1154,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "KV Constructions",
     "latitude": 8.8904,
-    "longitude": 83.9101
+    "longitude": 83.9101,
+    "coordinates": [
+      8.8904,
+      83.9101
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-058",
@@ -885,7 +1174,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "Apex Contractors",
     "latitude": 10.3193,
-    "longitude": 81.4075
+    "longitude": 81.4075,
+    "coordinates": [
+      10.3193,
+      81.4075
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-059",
@@ -900,7 +1194,12 @@ export const mockProjects: Project[] = [
     "state": "Gujarat",
     "contractor": "Surya Infra",
     "latitude": 29.1011,
-    "longitude": 82.7231
+    "longitude": 82.7231,
+    "coordinates": [
+      29.1011,
+      82.7231
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-060",
@@ -915,7 +1214,12 @@ export const mockProjects: Project[] = [
     "state": "Punjab",
     "contractor": "TechVision Suppliers",
     "latitude": 23.4191,
-    "longitude": 72.1575
+    "longitude": 72.1575,
+    "coordinates": [
+      23.4191,
+      72.1575
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-061",
@@ -930,7 +1234,12 @@ export const mockProjects: Project[] = [
     "state": "Gujarat",
     "contractor": "Apex Contractors",
     "latitude": 8.89,
-    "longitude": 72.7116
+    "longitude": 72.7116,
+    "coordinates": [
+      8.89,
+      72.7116
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-062",
@@ -945,7 +1254,12 @@ export const mockProjects: Project[] = [
     "state": "Karnataka",
     "contractor": "Reddy & Sons",
     "latitude": 21.5759,
-    "longitude": 87.952
+    "longitude": 87.952,
+    "coordinates": [
+      21.5759,
+      87.952
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-063",
@@ -960,7 +1274,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 14.045,
-    "longitude": 84.0367
+    "longitude": 84.0367,
+    "coordinates": [
+      14.045,
+      84.0367
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-064",
@@ -975,7 +1294,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Singh Builders",
     "latitude": 29.3961,
-    "longitude": 81.4857
+    "longitude": 81.4857,
+    "coordinates": [
+      29.3961,
+      81.4857
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-065",
@@ -990,7 +1314,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "L&T Local",
     "latitude": 9.1,
-    "longitude": 79.6766
+    "longitude": 79.6766,
+    "coordinates": [
+      9.1,
+      79.6766
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-066",
@@ -1005,7 +1334,12 @@ export const mockProjects: Project[] = [
     "state": "Andhra Pradesh",
     "contractor": "TechVision Suppliers",
     "latitude": 14.991,
-    "longitude": 89.1907
+    "longitude": 89.1907,
+    "coordinates": [
+      14.991,
+      89.1907
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-067",
@@ -1020,7 +1354,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Singh Builders",
     "latitude": 27.2494,
-    "longitude": 89.7341
+    "longitude": 89.7341,
+    "coordinates": [
+      27.2494,
+      89.7341
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-068",
@@ -1035,7 +1374,12 @@ export const mockProjects: Project[] = [
     "state": "Gujarat",
     "contractor": "Surya Infra",
     "latitude": 17.4797,
-    "longitude": 76.8774
+    "longitude": 76.8774,
+    "coordinates": [
+      17.4797,
+      76.8774
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-069",
@@ -1050,7 +1394,12 @@ export const mockProjects: Project[] = [
     "state": "Gujarat",
     "contractor": "L&T Local",
     "latitude": 15.356,
-    "longitude": 74.801
+    "longitude": 74.801,
+    "coordinates": [
+      15.356,
+      74.801
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-070",
@@ -1065,7 +1414,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 23.9759,
-    "longitude": 87.9541
+    "longitude": 87.9541,
+    "coordinates": [
+      23.9759,
+      87.9541
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-071",
@@ -1080,7 +1434,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "KV Constructions",
     "latitude": 27.6605,
-    "longitude": 74.0434
+    "longitude": 74.0434,
+    "coordinates": [
+      27.6605,
+      74.0434
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-072",
@@ -1095,7 +1454,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Surya Infra",
     "latitude": 25.693,
-    "longitude": 73.8722
+    "longitude": 73.8722,
+    "coordinates": [
+      25.693,
+      73.8722
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-073",
@@ -1110,7 +1474,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "National Builders",
     "latitude": 28.7248,
-    "longitude": 84.3341
+    "longitude": 84.3341,
+    "coordinates": [
+      28.7248,
+      84.3341
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-074",
@@ -1125,7 +1494,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Singh Builders",
     "latitude": 22.4074,
-    "longitude": 85.4789
+    "longitude": 85.4789,
+    "coordinates": [
+      22.4074,
+      85.4789
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-075",
@@ -1140,7 +1514,12 @@ export const mockProjects: Project[] = [
     "state": "Punjab",
     "contractor": "TechVision Suppliers",
     "latitude": 23.2148,
-    "longitude": 80.11
+    "longitude": 80.11,
+    "coordinates": [
+      23.2148,
+      80.11
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-076",
@@ -1155,7 +1534,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Reddy & Sons",
     "latitude": 17.3324,
-    "longitude": 81.9704
+    "longitude": 81.9704,
+    "coordinates": [
+      17.3324,
+      81.9704
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-077",
@@ -1170,7 +1554,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 19.309,
-    "longitude": 87.4552
+    "longitude": 87.4552,
+    "coordinates": [
+      19.309,
+      87.4552
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-078",
@@ -1185,7 +1574,12 @@ export const mockProjects: Project[] = [
     "state": "Gujarat",
     "contractor": "Singh Builders",
     "latitude": 28.3843,
-    "longitude": 70.2815
+    "longitude": 70.2815,
+    "coordinates": [
+      28.3843,
+      70.2815
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-079",
@@ -1200,7 +1594,12 @@ export const mockProjects: Project[] = [
     "state": "Gujarat",
     "contractor": "Surya Infra",
     "latitude": 18.005,
-    "longitude": 79.6276
+    "longitude": 79.6276,
+    "coordinates": [
+      18.005,
+      79.6276
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-080",
@@ -1215,7 +1614,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Singh Builders",
     "latitude": 10.1583,
-    "longitude": 80.9206
+    "longitude": 80.9206,
+    "coordinates": [
+      10.1583,
+      80.9206
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-081",
@@ -1230,7 +1634,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "KV Constructions",
     "latitude": 9.984,
-    "longitude": 89.7363
+    "longitude": 89.7363,
+    "coordinates": [
+      9.984,
+      89.7363
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-082",
@@ -1245,7 +1654,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "Apex Contractors",
     "latitude": 23.1852,
-    "longitude": 71.6511
+    "longitude": 71.6511,
+    "coordinates": [
+      23.1852,
+      71.6511
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-083",
@@ -1260,7 +1674,12 @@ export const mockProjects: Project[] = [
     "state": "Gujarat",
     "contractor": "KV Constructions",
     "latitude": 28.5543,
-    "longitude": 78.7487
+    "longitude": 78.7487,
+    "coordinates": [
+      28.5543,
+      78.7487
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-084",
@@ -1275,7 +1694,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 11.8639,
-    "longitude": 73.7014
+    "longitude": 73.7014,
+    "coordinates": [
+      11.8639,
+      73.7014
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-085",
@@ -1290,7 +1714,12 @@ export const mockProjects: Project[] = [
     "state": "Karnataka",
     "contractor": "KV Constructions",
     "latitude": 25.3799,
-    "longitude": 83.7734
+    "longitude": 83.7734,
+    "coordinates": [
+      25.3799,
+      83.7734
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-086",
@@ -1305,7 +1734,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "L&T Local",
     "latitude": 23.0527,
-    "longitude": 80.9893
+    "longitude": 80.9893,
+    "coordinates": [
+      23.0527,
+      80.9893
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-087",
@@ -1320,7 +1754,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "L&T Local",
     "latitude": 13.1331,
-    "longitude": 76.1355
+    "longitude": 76.1355,
+    "coordinates": [
+      13.1331,
+      76.1355
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-088",
@@ -1335,7 +1774,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Reddy & Sons",
     "latitude": 29.5795,
-    "longitude": 78.8304
+    "longitude": 78.8304,
+    "coordinates": [
+      29.5795,
+      78.8304
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-089",
@@ -1350,7 +1794,12 @@ export const mockProjects: Project[] = [
     "state": "Punjab",
     "contractor": "Surya Infra",
     "latitude": 26.4638,
-    "longitude": 81.9911
+    "longitude": 81.9911,
+    "coordinates": [
+      26.4638,
+      81.9911
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-090",
@@ -1365,7 +1814,12 @@ export const mockProjects: Project[] = [
     "state": "Andhra Pradesh",
     "contractor": "TechVision Suppliers",
     "latitude": 10.0224,
-    "longitude": 88.3649
+    "longitude": 88.3649,
+    "coordinates": [
+      10.0224,
+      88.3649
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-091",
@@ -1380,7 +1834,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 22.5342,
-    "longitude": 86.278
+    "longitude": 86.278,
+    "coordinates": [
+      22.5342,
+      86.278
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-092",
@@ -1395,7 +1854,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Singh Builders",
     "latitude": 8.7354,
-    "longitude": 77.4406
+    "longitude": 77.4406,
+    "coordinates": [
+      8.7354,
+      77.4406
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-093",
@@ -1410,7 +1874,12 @@ export const mockProjects: Project[] = [
     "state": "Andhra Pradesh",
     "contractor": "Apex Contractors",
     "latitude": 10.0419,
-    "longitude": 83.4466
+    "longitude": 83.4466,
+    "coordinates": [
+      10.0419,
+      83.4466
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-094",
@@ -1425,7 +1894,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Reddy & Sons",
     "latitude": 18.2235,
-    "longitude": 78.6566
+    "longitude": 78.6566,
+    "coordinates": [
+      18.2235,
+      78.6566
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-095",
@@ -1440,7 +1914,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "National Builders",
     "latitude": 12.8103,
-    "longitude": 75.2263
+    "longitude": 75.2263,
+    "coordinates": [
+      12.8103,
+      75.2263
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-096",
@@ -1455,7 +1934,12 @@ export const mockProjects: Project[] = [
     "state": "Tamil Nadu",
     "contractor": "Surya Infra",
     "latitude": 16.6344,
-    "longitude": 74.3258
+    "longitude": 74.3258,
+    "coordinates": [
+      16.6344,
+      74.3258
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-097",
@@ -1470,7 +1954,12 @@ export const mockProjects: Project[] = [
     "state": "Uttar Pradesh",
     "contractor": "Singh Builders",
     "latitude": 21.5763,
-    "longitude": 83.8208
+    "longitude": 83.8208,
+    "coordinates": [
+      21.5763,
+      83.8208
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-098",
@@ -1485,7 +1974,12 @@ export const mockProjects: Project[] = [
     "state": "Maharashtra",
     "contractor": "Surya Infra",
     "latitude": 21.1624,
-    "longitude": 72.4791
+    "longitude": 72.4791,
+    "coordinates": [
+      21.1624,
+      72.4791
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-099",
@@ -1500,7 +1994,12 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "KV Constructions",
     "latitude": 9.6429,
-    "longitude": 71.6876
+    "longitude": 71.6876,
+    "coordinates": [
+      9.6429,
+      71.6876
+    ],
+    "riskScore": 0
   },
   {
     "id": "PRJ-2023-100",
@@ -1515,6 +2014,19 @@ export const mockProjects: Project[] = [
     "state": "Kerala",
     "contractor": "Surya Infra",
     "latitude": 20.5931,
-    "longitude": 87.0522
+    "longitude": 87.0522,
+    "coordinates": [
+      20.5931,
+      87.0522
+    ],
+    "riskScore": 0
   }
 ];
+
+export const riskFactorsById: Record<string, RiskFactor[]> = {};
+
+for (const project of mockProjects) {
+  const { score, factors } = computeRisk(project, mockProjects);
+  project.riskScore = score;
+  riskFactorsById[project.id] = factors;
+}

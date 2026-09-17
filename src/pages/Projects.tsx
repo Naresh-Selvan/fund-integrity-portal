@@ -108,8 +108,8 @@ export default function Projects() {
     }
 
     result.sort((a, b) => {
-      let aVal = a[sortColumn as keyof typeof a];
-      let bVal = b[sortColumn as keyof typeof b];
+      let aVal = a[sortColumn as keyof typeof a] ?? '';
+      let bVal = b[sortColumn as keyof typeof b] ?? '';
       
       if (typeof aVal === 'string' && typeof bVal === 'string') {
         return sortDirection === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);

@@ -1,22 +1,4 @@
-export type ProjectStatus = 'Active' | 'Delayed' | 'Completed' | 'Flagged' | 'Registered';
-
-export interface Project {
-  id: string;
-  name: string;
-  scheme: string;
-  budget: number;
-  spent: number;
-  startDate: string;
-  endDate: string;
-  status: ProjectStatus;
-  district: string;
-  state: string;
-  contractor: string;
-  latitude?: number;
-  longitude?: number;
-}
-
-export const mockProjects: Project[] = [
+[
   {
     "id": "PRJ-2023-001",
     "name": "Construction of Additional Classrooms in ZP School, Thrissur",
@@ -1517,4 +1499,4 @@ export const mockProjects: Project[] = [
     "latitude": 20.5931,
     "longitude": 87.0522
   }
-];
+]

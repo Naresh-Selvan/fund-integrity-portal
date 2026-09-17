@@ -1,46 +1,522 @@
 {
   "PRJ-2023-001": {
-    "ml_risk_score": 52,
-    "is_anomaly": true,
+    "ml_risk_score": 40,
+    "is_anomaly": false,
     "ai_insights": []
   },
   "PRJ-2023-002": {
-    "ml_risk_score": 50,
-    "is_anomaly": true,
-    "ai_insights": [
-      "ML_FLAG: Impossible completion timeline vs funds disbursed.",
-      "ML_FLAG: Contractor monopoly detected in region."
-    ]
+    "ml_risk_score": 42,
+    "is_anomaly": false,
+    "ai_insights": []
   },
   "PRJ-2023-003": {
-    "ml_risk_score": 56,
-    "is_anomaly": true,
-    "ai_insights": [
-      "ML_FLAG: Severe timeline deviation from baseline models."
-    ]
+    "ml_risk_score": 35,
+    "is_anomaly": false,
+    "ai_insights": []
   },
   "PRJ-2023-004": {
-    "ml_risk_score": 46,
+    "ml_risk_score": 41,
     "is_anomaly": false,
     "ai_insights": []
   },
   "PRJ-2023-005": {
-    "ml_risk_score": 49,
+    "ml_risk_score": 41,
     "is_anomaly": false,
     "ai_insights": []
   },
   "PRJ-2023-006": {
-    "ml_risk_score": 45,
+    "ml_risk_score": 33,
     "is_anomaly": false,
     "ai_insights": []
   },
   "PRJ-2023-007": {
+    "ml_risk_score": 53,
+    "is_anomaly": true,
+    "ai_insights": [
+      "ML_FLAG: Contractor monopoly detected in region."
+    ]
+  },
+  "PRJ-2023-008": {
+    "ml_risk_score": 37,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-009": {
+    "ml_risk_score": 38,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-010": {
+    "ml_risk_score": 44,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-011": {
+    "ml_risk_score": 43,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-012": {
+    "ml_risk_score": 44,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-013": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-014": {
+    "ml_risk_score": 46,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-015": {
+    "ml_risk_score": 37,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-016": {
+    "ml_risk_score": 36,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-017": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-018": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-019": {
+    "ml_risk_score": 37,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-020": {
+    "ml_risk_score": 55,
+    "is_anomaly": true,
+    "ai_insights": [
+      "ML_FLAG: Critical cost overrun detected (Spent > Budget)."
+    ]
+  },
+  "PRJ-2023-021": {
+    "ml_risk_score": 50,
+    "is_anomaly": true,
+    "ai_insights": [
+      "ML_FLAG: Contractor monopoly detected in region."
+    ]
+  },
+  "PRJ-2023-022": {
+    "ml_risk_score": 39,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-023": {
+    "ml_risk_score": 38,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-024": {
+    "ml_risk_score": 37,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-025": {
+    "ml_risk_score": 35,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-026": {
+    "ml_risk_score": 33,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-027": {
+    "ml_risk_score": 40,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-028": {
+    "ml_risk_score": 48,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-029": {
+    "ml_risk_score": 42,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-030": {
+    "ml_risk_score": 37,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-031": {
     "ml_risk_score": 45,
     "is_anomaly": false,
     "ai_insights": []
   },
-  "PRJ-2023-008": {
+  "PRJ-2023-032": {
+    "ml_risk_score": 47,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-033": {
+    "ml_risk_score": 40,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-034": {
+    "ml_risk_score": 35,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-035": {
+    "ml_risk_score": 54,
+    "is_anomaly": true,
+    "ai_insights": [
+      "ML_FLAG: Contractor monopoly detected in region."
+    ]
+  },
+  "PRJ-2023-036": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-037": {
+    "ml_risk_score": 34,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-038": {
+    "ml_risk_score": 47,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-039": {
+    "ml_risk_score": 40,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-040": {
+    "ml_risk_score": 40,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-041": {
+    "ml_risk_score": 37,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-042": {
+    "ml_risk_score": 47,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-043": {
+    "ml_risk_score": 33,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-044": {
+    "ml_risk_score": 39,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-045": {
+    "ml_risk_score": 44,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-046": {
+    "ml_risk_score": 36,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-047": {
+    "ml_risk_score": 39,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-048": {
+    "ml_risk_score": 33,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-049": {
+    "ml_risk_score": 53,
+    "is_anomaly": true,
+    "ai_insights": [
+      "ML_FLAG: Contractor monopoly detected in region."
+    ]
+  },
+  "PRJ-2023-050": {
+    "ml_risk_score": 46,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-051": {
+    "ml_risk_score": 33,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-052": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-053": {
+    "ml_risk_score": 33,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-054": {
+    "ml_risk_score": 39,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-055": {
+    "ml_risk_score": 39,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-056": {
+    "ml_risk_score": 53,
+    "is_anomaly": true,
+    "ai_insights": [
+      "ML_FLAG: Contractor monopoly detected in region."
+    ]
+  },
+  "PRJ-2023-057": {
+    "ml_risk_score": 39,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-058": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-059": {
+    "ml_risk_score": 34,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-060": {
+    "ml_risk_score": 40,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-061": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-062": {
+    "ml_risk_score": 37,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-063": {
+    "ml_risk_score": 50,
+    "is_anomaly": true,
+    "ai_insights": [
+      "ML_FLAG: Contractor monopoly detected in region."
+    ]
+  },
+  "PRJ-2023-064": {
+    "ml_risk_score": 32,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-065": {
+    "ml_risk_score": 34,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-066": {
+    "ml_risk_score": 36,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-067": {
+    "ml_risk_score": 32,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-068": {
+    "ml_risk_score": 38,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-069": {
+    "ml_risk_score": 40,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-070": {
+    "ml_risk_score": 52,
+    "is_anomaly": true,
+    "ai_insights": [
+      "ML_FLAG: Critical cost overrun detected (Spent > Budget).",
+      "ML_FLAG: Contractor monopoly detected in region."
+    ]
+  },
+  "PRJ-2023-071": {
+    "ml_risk_score": 43,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-072": {
+    "ml_risk_score": 35,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-073": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-074": {
+    "ml_risk_score": 35,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-075": {
+    "ml_risk_score": 42,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-076": {
+    "ml_risk_score": 43,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-077": {
+    "ml_risk_score": 47,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-078": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-079": {
+    "ml_risk_score": 44,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-080": {
+    "ml_risk_score": 37,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-081": {
+    "ml_risk_score": 36,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-082": {
+    "ml_risk_score": 34,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-083": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-084": {
     "ml_risk_score": 49,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-085": {
+    "ml_risk_score": 42,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-086": {
+    "ml_risk_score": 34,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-087": {
+    "ml_risk_score": 42,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-088": {
+    "ml_risk_score": 53,
+    "is_anomaly": true,
+    "ai_insights": [
+      "ML_FLAG: Contractor monopoly detected in region."
+    ]
+  },
+  "PRJ-2023-089": {
+    "ml_risk_score": 33,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-090": {
+    "ml_risk_score": 46,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-091": {
+    "ml_risk_score": 52,
+    "is_anomaly": true,
+    "ai_insights": [
+      "ML_FLAG: Contractor monopoly detected in region."
+    ]
+  },
+  "PRJ-2023-092": {
+    "ml_risk_score": 40,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-093": {
+    "ml_risk_score": 45,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-094": {
+    "ml_risk_score": 45,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-095": {
+    "ml_risk_score": 42,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-096": {
+    "ml_risk_score": 37,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-097": {
+    "ml_risk_score": 41,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-098": {
+    "ml_risk_score": 46,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-099": {
+    "ml_risk_score": 39,
+    "is_anomaly": false,
+    "ai_insights": []
+  },
+  "PRJ-2023-100": {
+    "ml_risk_score": 42,
     "is_anomaly": false,
     "ai_insights": []
   }

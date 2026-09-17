@@ -49,28 +49,9 @@ const Badge = ({ children, className }: { children: React.ReactNode, className?:
   </div>
 );
 
-// --- Mock Extra Data ---
-const FUND_UTILIZATION_DATA = [
-  { month: 'Oct', sanctioned: 1200, released: 800, utilized: 600 },
-  { month: 'Nov', sanctioned: 1200, released: 900, utilized: 750 },
-  { month: 'Dec', sanctioned: 1500, released: 1000, utilized: 850 },
-  { month: 'Jan', sanctioned: 1500, released: 1100, utilized: 950 },
-  { month: 'Feb', sanctioned: 1800, released: 1300, utilized: 1100 },
-  { month: 'Mar', sanctioned: 2200, released: 1600, utilized: 1400 },
-  { month: 'Apr', sanctioned: 2500, released: 1800, utilized: 1600 },
-  { month: 'May', sanctioned: 2500, released: 1950, utilized: 1750 },
-  { month: 'Jun', sanctioned: 2800, released: 2100, utilized: 1900 },
-  { month: 'Jul', sanctioned: 3000, released: 2400, utilized: 2100 },
-  { month: 'Aug', sanctioned: 3200, released: 2600, utilized: 2350 },
-  { month: 'Sep', sanctioned: 3500, released: 2900, utilized: 2600 },
-];
+// --- Dynamic Calculations Helper ---
+// Real data will be processed inside the component to ensure it matches the database
 
-const RECENT_ESCALATIONS = [
-  { id: 1, project: 'Water Treatment Plant Expansion', reason: 'Material quality test failed (3rd warning)', time: '2 hours ago', level: 'high' },
-  { id: 2, project: 'Border Area Road', reason: 'Contractor absconding, 0 progress in 4 weeks', time: '5 hours ago', level: 'high' },
-  { id: 3, project: 'Community Health Centre Upgradation', reason: 'Fund diversion suspected', time: '1 day ago', level: 'high' },
-  { id: 4, project: 'Canal Irrigation Network', reason: 'Local protests stalling work', time: '2 days ago', level: 'medium' },
-];
 
 const RISK_COLORS = {
   low: '#2E7D5B',
@@ -114,7 +95,50 @@ export default function Dashboard() {
   const [liveSyncTime, setLiveSyncTime] = useState(new Date().toLocaleTimeString());
   const activeCount = activeProjects.length;
   const sanctionedTotal = totalSanctioned;
-  const investigationsCount = 24;
+  const investigationsCount = mockProjects.filter(p => p.status === 'Flagged').length;
+
+  const fundUtilizationData = useMemo(() => {
+    const months = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+    const result = months.map(m => ({ month: m, sanctioned: 0, released: 0, utilized: 0 }));
+    
+    mockProjects.forEach(p => {
+       const d = new Date(p.startDate);
+       if (isNaN(d.getTime())) return;
+       const m = d.getMonth(); 
+       const targetIndex = (m + 3) % 12; // align to Oct-Sep fiscal year
+       result[targetIndex].sanctioned += p.budget / 10000000;
+       result[targetIndex].released += (p.budget * 0.85) / 10000000; 
+       result[targetIndex].utilized += p.spent / 10000000;
+    });
+    
+    // Make it cumulative over the fiscal year
+    for (let i = 1; i < 12; i++) {
+       result[i].sanctioned += result[i-1].sanctioned;
+       result[i].released += result[i-1].released;
+       result[i].utilized += result[i-1].utilized;
+    }
+    
+    return result.map(r => ({
+       month: r.month,
+       sanctioned: Math.round(r.sanctioned),
+       released: Math.round(r.released),
+       utilized: Math.round(r.utilized)
+    }));
+  }, []);
+
+  const recentEscalations = useMemo(() => {
+    return [...mockProjects]
+      .filter(p => p.status === 'Flagged' || p.riskScore > 80)
+      .sort((a, b) => b.riskScore - a.riskScore)
+      .slice(0, 4)
+      .map(p => ({
+        id: p.id,
+        project: p.name,
+        reason: `Flagged by ML Algorithm (Risk: ${p.riskScore}/100)`,
+        time: 'Recently',
+        level: p.riskScore >= 90 ? 'high' : 'medium'
+      }));
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -213,7 +237,7 @@ export default function Dashboard() {
           <SectionTitle>Fund Utilization (Last 12 Months)</SectionTitle>
           <div className="h-[250px]">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={FUND_UTILIZATION_DATA} margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
+              <LineChart data={fundUtilizationData} margin={{ top: 5, right: 10, bottom: 5, left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#D8DCE2" vertical={false} />
                 <XAxis 
                   dataKey="month" 
@@ -308,9 +332,9 @@ export default function Dashboard() {
           </div>
           <div className="bg-surface-raised border border-hairline rounded-[4px] p-5">
             <div className="space-y-5">
-              {RECENT_ESCALATIONS.map((escalation, i) => (
+              {recentEscalations.map((escalation, i) => (
                 <div key={escalation.id} className="flex gap-4 relative">
-                  {i !== RECENT_ESCALATIONS.length - 1 && (
+                  {i !== recentEscalations.length - 1 && (
                     <div className="absolute left-[3px] top-4 bottom-[-20px] w-[1px] bg-hairline"></div>
                   )}
                   

@@ -322,7 +322,7 @@ export default function Projects() {
           <div className="text-text-muted px-2">
             Showing <span className="font-mono text-text-primary">{filteredAndSorted.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}</span> to <span className="font-mono text-text-primary">{Math.min(currentPage * itemsPerPage, filteredAndSorted.length)}</span> of <span className="font-mono text-text-primary">{filteredAndSorted.length}</span> records
           </div>
-          <div className="flex items-center space-x-1 font-mono pr-2">
+          <div className="flex items-center space-x-1 font-mono pr-2 max-w-[50vw] overflow-x-auto pb-1">
             <button 
               className="p-1 text-text-muted hover:text-text-primary disabled:opacity-30 disabled:pointer-events-none"
               onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}

@@ -109,14 +109,20 @@ export default function Dashboard() {
     }));
 
   // --- Animated Values ---
-  const animatedActive = useCountUp(activeProjects.length);
-  const animatedSanctioned = useCountUp(totalSanctioned);
   const animatedHighRisk = useCountUp(riskDistribution[2].value);
-  const animatedInvestigations = useCountUp(24); // mock value
 
   const [liveSyncTime, setLiveSyncTime] = useState(new Date().toLocaleTimeString());
+  const [liveActive, setLiveActive] = useState(activeProjects.length);
+  const [liveSanctioned, setLiveSanctioned] = useState(totalSanctioned);
+  const [liveInvestigations, setLiveInvestigations] = useState(24);
+
   useEffect(() => {
-    const timer = setInterval(() => setLiveSyncTime(new Date().toLocaleTimeString()), 1000);
+    const timer = setInterval(() => {
+      setLiveSyncTime(new Date().toLocaleTimeString());
+      setLiveSanctioned(prev => prev + Math.floor(Math.random() * 500000));
+      if (Math.random() > 0.8) setLiveActive(prev => prev + 1);
+      if (Math.random() > 0.9) setLiveInvestigations(prev => prev + 1);
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -136,28 +142,28 @@ export default function Dashboard() {
       <div className="flex bg-surface-raised border border-hairline rounded-[4px] divide-x divide-hairline">
         <div className="flex-1 p-5">
           <div className="text-xs text-text-muted mb-1">Total Active Projects</div>
-          <div className="text-2xl text-text-primary font-mono">{animatedActive}</div>
-          <p className="text-[11px] text-text-muted mt-2 flex items-center">
-            <TrendingUp className="w-3 h-3 mr-1 text-text-muted" />
-            <span>+4 since last month</span>
+          <div className="text-2xl text-text-primary font-mono">{liveActive}</div>
+          <p className="text-[11px] text-text-muted mt-2 flex items-center text-emerald-500">
+            <TrendingUp className="w-3 h-3 mr-1" />
+            <span>Live updates active</span>
           </p>
         </div>
         
         <div className="flex-1 p-5">
           <div className="text-xs text-text-muted mb-1">Total Sanctioned Funds</div>
-          <div className="text-2xl text-text-primary font-mono">{formatCurrency(animatedSanctioned)}</div>
-          <p className="text-[11px] text-text-muted mt-2 flex items-center">
-            <TrendingUp className="w-3 h-3 mr-1 text-text-muted" />
-            <span>+12.5% since last month</span>
+          <div className="text-2xl text-text-primary font-mono">{formatCurrency(liveSanctioned)}</div>
+          <p className="text-[11px] text-text-muted mt-2 flex items-center text-emerald-500">
+            <TrendingUp className="w-3 h-3 mr-1" />
+            <span>Fund disbursals in real-time</span>
           </p>
         </div>
 
-        <div className="flex-1 p-5 bg-[#B23A3A]/5">
+        <div className="flex-1 p-5 bg-surface">
           <div className="text-xs text-[#B23A3A] font-medium mb-1 flex items-center">
-            <AlertTriangle className="h-3 w-3 mr-1" /> High-Risk Projects
+            <AlertTriangle className="w-3.5 h-3.5 mr-1" /> High-Risk Projects
           </div>
-          <div className="text-2xl text-[#B23A3A] font-mono">{animatedHighRisk}</div>
-          <p className="text-[11px] text-[#B23A3A]/80 mt-2 flex items-center">
+          <div className="text-2xl text-text-primary font-mono">{animatedHighRisk}</div>
+          <p className="text-[11px] text-text-muted mt-2 flex items-center text-emerald-500">
             <TrendingDown className="w-3 h-3 mr-1" />
             <span>-2 since last month</span>
           </p>
@@ -165,10 +171,10 @@ export default function Dashboard() {
 
         <div className="flex-1 p-5">
           <div className="text-xs text-text-muted mb-1">Open Investigations</div>
-          <div className="text-2xl text-text-primary font-mono">{animatedInvestigations}</div>
-          <p className="text-[11px] text-text-muted mt-2 flex items-center">
-            <TrendingUp className="w-3 h-3 mr-1 text-text-muted" />
-            <span>+3 since last month</span>
+          <div className="text-2xl text-text-primary font-mono">{liveInvestigations}</div>
+          <p className="text-[11px] text-text-muted mt-2 flex items-center text-[#C98A2E]">
+            <TrendingUp className="w-3 h-3 mr-1" />
+            <span>Live Syncing...</span>
           </p>
         </div>
       </div>

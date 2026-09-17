@@ -27,7 +27,7 @@ contractors = ['Surya Infra', 'KV Constructions', 'Reddy & Sons', 'Singh Builder
 
 projects = []
 
-for i in range(1, 101):
+for i in range(1, 5001):
     state = random.choice(list(states_districts.keys()))
     district = random.choice(states_districts[state])
     template = random.choice(templates)
@@ -45,18 +45,16 @@ for i in range(1, 101):
         
     contractor = random.choice(contractors)
     
-    # Intentionally inject anomalies (e.g., spent > budget)
     if i % 10 == 0:
         spent = int(budget * random.uniform(1.1, 1.5))
         status = 'Active'
     
-    # Intentionally inject high vendor density (all to Surya Infra)
     if i % 7 == 0:
         contractor = 'Surya Infra'
         state = 'Maharashtra'
     
     projects.append({
-        'id': f'PRJ-2023-{str(i).zfill(3)}',
+        'id': f'PRJ-2023-{str(i).zfill(4)}',
         'name': name,
         'scheme': 'MPLADS',
         'budget': budget,
@@ -71,54 +69,7 @@ for i in range(1, 101):
         'longitude': round(random.uniform(70.0, 90.0), 4)
     })
 
-# Write to TS
-ts_content = f"""export type ProjectStatus = 'Active' | 'Delayed' | 'Completed' | 'Flagged' | 'Registered';
-
-export interface Project {{
-  id: string;
-  name: string;
-  scheme: string;
-  budget: number;
-  spent: number;
-  startDate: string;
-  endDate: string;
-  status: ProjectStatus;
-  district: string;
-  state: string;
-  contractor: string;
-  latitude?: number;
-  longitude?: number;
-}}
-
-export const mockProjects: Project[] = {json.dumps(projects, indent=2)};
-"""
-
-with open('../src/data/mockProjects.ts', 'w') as f:
-    f.write(ts_content)
-
-# Write to JSON for ML
 with open('projects.json', 'w') as f:
     json.dump(projects, f, indent=2)
 
-# Write to Dart
-dart_content = "import '../models/project.dart';\n\nfinal List<Project> mockProjects = [\n"
-for p in projects:
-    dart_content += f"""  Project(
-    id: '{p['id']}',
-    name: '{p['name']}',
-    scheme: '{p['scheme']}',
-    budget: {p['budget']},
-    spent: {p['spent']},
-    startDate: '{p['startDate']}',
-    endDate: '{p['endDate']}',
-    status: '{p['status']}',
-    district: '{p['district']}',
-    state: '{p['state']}',
-    contractor: '{p['contractor']}',
-  ),\n"""
-dart_content += "];"
-
-with open('D:/ai_fund_integrity/lib/data/mock_data.dart', 'w') as f:
-    f.write(dart_content)
-
-print('Generated 100 projects for React, ML, and Flutter!')
+print('Generated 5000 projects!')

@@ -59,6 +59,7 @@ export default function GISMap() {
   const [riskFilter, setRiskFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [showOverlaps, setShowOverlaps] = useState(false);
+  const [markerLimit, setMarkerLimit] = useState('1000');
 
   const schemes = Array.from(new Set(mockProjects.map(p => p.scheme)));
   const statuses = Array.from(new Set(mockProjects.map(p => p.status)));
@@ -72,8 +73,13 @@ export default function GISMap() {
       else if (riskFilter === 'Medium') result = result.filter(p => p.riskScore >= 40 && p.riskScore < 70);
       else if (riskFilter === 'Low') result = result.filter(p => p.riskScore < 40);
     }
+    
+    // Apply map rendering limit to prevent Leaflet browser crash with massive datasets
+    if (markerLimit !== 'All') {
+      result = result.slice(0, parseInt(markerLimit));
+    }
     return result;
-  }, [schemeFilter, riskFilter, statusFilter]);
+  }, [schemeFilter, riskFilter, statusFilter, markerLimit]);
 
   return (
     <div className="h-full flex flex-col md:flex-row border-y border-hairline -mx-6 -my-6 bg-surface">
@@ -91,6 +97,7 @@ export default function GISMap() {
             <Select label="Scheme" placeholder="All Schemes" options={schemes} value={schemeFilter} onChange={setSchemeFilter} />
             <Select label="Status" placeholder="All Statuses" options={statuses} value={statusFilter} onChange={setStatusFilter} />
             <Select label="Risk Level" placeholder="All Risk Levels" options={['Low', 'Medium', 'High']} value={riskFilter} onChange={setRiskFilter} />
+            <Select label="Map Render Limit" placeholder="Render All Data" options={['100', '500', '1000', '2000', '5000', 'All']} value={markerLimit} onChange={setMarkerLimit} />
           </div>
           
           <div className="pt-4 border-t border-hairline">

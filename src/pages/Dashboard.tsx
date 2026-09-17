@@ -112,16 +112,13 @@ export default function Dashboard() {
   const animatedHighRisk = useCountUp(riskDistribution[2].value);
 
   const [liveSyncTime, setLiveSyncTime] = useState(new Date().toLocaleTimeString());
-  const [liveActive, setLiveActive] = useState(activeProjects.length);
-  const [liveSanctioned, setLiveSanctioned] = useState(totalSanctioned);
-  const [liveInvestigations, setLiveInvestigations] = useState(24);
+  const activeCount = activeProjects.length;
+  const sanctionedTotal = totalSanctioned;
+  const investigationsCount = 24;
 
   useEffect(() => {
     const timer = setInterval(() => {
       setLiveSyncTime(new Date().toLocaleTimeString());
-      setLiveSanctioned(prev => prev + Math.floor(Math.random() * 500000));
-      if (Math.random() > 0.8) setLiveActive(prev => prev + 1);
-      if (Math.random() > 0.9) setLiveInvestigations(prev => prev + 1);
     }, 1000);
     return () => clearInterval(timer);
   }, []);
@@ -142,19 +139,19 @@ export default function Dashboard() {
       <div className="flex bg-surface-raised border border-hairline rounded-[4px] divide-x divide-hairline">
         <div className="flex-1 p-5">
           <div className="text-xs text-text-muted mb-1">Total Active Projects</div>
-          <div className="text-2xl text-text-primary font-mono">{liveActive}</div>
-          <p className="text-[11px] text-text-muted mt-2 flex items-center text-emerald-500">
+          <div className="text-2xl text-text-primary font-mono">{activeCount}</div>
+          <p className="text-[11px] text-text-muted mt-2 flex items-center">
             <TrendingUp className="w-3 h-3 mr-1" />
-            <span>Live updates active</span>
+            <span>Exact match with database</span>
           </p>
         </div>
         
         <div className="flex-1 p-5">
           <div className="text-xs text-text-muted mb-1">Total Sanctioned Funds</div>
-          <div className="text-2xl text-text-primary font-mono">{formatCurrency(liveSanctioned)}</div>
-          <p className="text-[11px] text-text-muted mt-2 flex items-center text-emerald-500">
+          <div className="text-2xl text-text-primary font-mono">{formatCurrency(sanctionedTotal)}</div>
+          <p className="text-[11px] text-text-muted mt-2 flex items-center">
             <TrendingUp className="w-3 h-3 mr-1" />
-            <span>Fund disbursals in real-time</span>
+            <span>Real-time DB aggregate</span>
           </p>
         </div>
 
@@ -163,7 +160,7 @@ export default function Dashboard() {
             <AlertTriangle className="w-3.5 h-3.5 mr-1" /> High-Risk Projects
           </div>
           <div className="text-2xl text-text-primary font-mono">{animatedHighRisk}</div>
-          <p className="text-[11px] text-text-muted mt-2 flex items-center text-emerald-500">
+          <p className="text-[11px] text-text-muted mt-2 flex items-center text-[#B23A3A]">
             <TrendingDown className="w-3 h-3 mr-1" />
             <span>-2 since last month</span>
           </p>
@@ -171,10 +168,10 @@ export default function Dashboard() {
 
         <div className="flex-1 p-5">
           <div className="text-xs text-text-muted mb-1">Open Investigations</div>
-          <div className="text-2xl text-text-primary font-mono">{liveInvestigations}</div>
+          <div className="text-2xl text-text-primary font-mono">{investigationsCount}</div>
           <p className="text-[11px] text-text-muted mt-2 flex items-center text-[#C98A2E]">
             <TrendingUp className="w-3 h-3 mr-1" />
-            <span>Live Syncing...</span>
+            <span>Awaiting field officer review</span>
           </p>
         </div>
       </div>

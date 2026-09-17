@@ -2,14 +2,42 @@ import json
 import random
 
 states_districts = {
-    'Maharashtra': ['Mumbai Suburban', 'Pune', 'Nagpur', 'Thane'],
-    'Uttar Pradesh': ['Varanasi', 'Lucknow', 'Kanpur', 'Agra'],
-    'Tamil Nadu': ['Chennai', 'Madurai', 'Coimbatore', 'Salem'],
+    'Andhra Pradesh': ['Visakhapatnam', 'Vijayawada', 'Guntur', 'Nellore'],
+    'Arunachal Pradesh': ['Tawang', 'Itanagar', 'Ziro'],
+    'Assam': ['Guwahati', 'Dibrugarh', 'Silchar', 'Jorhat'],
+    'Bihar': ['Patna', 'Gaya', 'Bhagalpur', 'Muzaffarpur'],
+    'Chhattisgarh': ['Raipur', 'Bhilai', 'Bilaspur', 'Korba'],
+    'Goa': ['Panaji', 'Margao', 'Vasco da Gama'],
+    'Gujarat': ['Ahmedabad', 'Surat', 'Vadodara', 'Rajkot'],
+    'Haryana': ['Gurugram', 'Faridabad', 'Panipat', 'Ambala'],
+    'Himachal Pradesh': ['Shimla', 'Manali', 'Dharamshala'],
+    'Jharkhand': ['Ranchi', 'Jamshedpur', 'Dhanbad', 'Bokaro'],
     'Karnataka': ['Bengaluru', 'Mysuru', 'Mangaluru', 'Hubballi'],
     'Kerala': ['Ernakulam', 'Thiruvananthapuram', 'Kozhikode', 'Thrissur'],
-    'Gujarat': ['Ahmedabad', 'Surat', 'Vadodara', 'Rajkot'],
+    'Madhya Pradesh': ['Indore', 'Bhopal', 'Jabalpur', 'Gwalior'],
+    'Maharashtra': ['Mumbai', 'Pune', 'Nagpur', 'Thane'],
+    'Manipur': ['Imphal', 'Churachandpur'],
+    'Meghalaya': ['Shillong', 'Tura', 'Cherrapunji'],
+    'Mizoram': ['Aizawl', 'Lunglei'],
+    'Nagaland': ['Kohima', 'Dimapur', 'Mokokchung'],
+    'Odisha': ['Bhubaneswar', 'Cuttack', 'Rourkela', 'Puri'],
     'Punjab': ['Ludhiana', 'Amritsar', 'Jalandhar', 'Patiala'],
-    'Andhra Pradesh': ['Visakhapatnam', 'Vijayawada', 'Guntur', 'Nellore']
+    'Rajasthan': ['Jaipur', 'Jodhpur', 'Udaipur', 'Kota'],
+    'Sikkim': ['Gangtok', 'Namchi', 'Mangan'],
+    'Tamil Nadu': ['Chennai', 'Madurai', 'Coimbatore', 'Salem'],
+    'Telangana': ['Hyderabad', 'Warangal', 'Nizamabad', 'Khammam'],
+    'Tripura': ['Agartala', 'Udaipur', 'Dharmanagar'],
+    'Uttar Pradesh': ['Lucknow', 'Kanpur', 'Agra', 'Varanasi'],
+    'Uttarakhand': ['Dehradun', 'Haridwar', 'Roorkee', 'Nainital'],
+    'West Bengal': ['Kolkata', 'Darjeeling', 'Howrah', 'Siliguri'],
+    'Andaman and Nicobar Islands': ['Port Blair'],
+    'Chandigarh': ['Chandigarh'],
+    'Dadra and Nagar Haveli and Daman and Diu': ['Daman', 'Diu', 'Silvassa'],
+    'Delhi': ['New Delhi', 'North Delhi', 'South Delhi'],
+    'Jammu and Kashmir': ['Srinagar', 'Jammu', 'Anantnag'],
+    'Ladakh': ['Leh', 'Kargil'],
+    'Lakshadweep': ['Kavaratti'],
+    'Puducherry': ['Puducherry', 'Auroville']
 }
 
 templates = [
@@ -52,6 +80,7 @@ for i in range(1, 5001):
     if i % 7 == 0:
         contractor = 'Surya Infra'
         state = 'Maharashtra'
+        district = 'Mumbai'
     
     projects.append({
         'id': f'PRJ-2023-{str(i).zfill(4)}',
@@ -72,4 +101,4 @@ for i in range(1, 5001):
 with open('projects.json', 'w') as f:
     json.dump(projects, f, indent=2)
 
-print('Generated 5000 projects!')
+print('Generated 5000 projects across ALL India!')

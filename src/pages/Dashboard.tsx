@@ -114,15 +114,21 @@ export default function Dashboard() {
   const animatedHighRisk = useCountUp(riskDistribution[2].value);
   const animatedInvestigations = useCountUp(24); // mock value
 
+  const [liveSyncTime, setLiveSyncTime] = useState(new Date().toLocaleTimeString());
+  useEffect(() => {
+    const timer = setInterval(() => setLiveSyncTime(new Date().toLocaleTimeString()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="space-y-8 max-w-[1400px] mx-auto">
       <div className="flex justify-between items-end pb-4 border-b border-hairline">
         <div>
           <h1 className="text-2xl font-medium text-text-primary">Dashboard Overview</h1>
         </div>
-        <div className="flex items-center text-sm text-text-muted font-mono">
-          <Clock className="w-3.5 h-3.5 mr-1.5" />
-          Last synced: Today, 09:41 AM
+        <div className="flex items-center text-sm text-text-muted font-mono bg-surface-raised px-3 py-1.5 rounded-full border border-hairline shadow-sm">
+          <div className="w-2 h-2 rounded-full bg-emerald-500 mr-2.5 animate-pulse"></div>
+          Live Sync: <span className="ml-1 text-text-primary">{liveSyncTime}</span>
         </div>
       </div>
 

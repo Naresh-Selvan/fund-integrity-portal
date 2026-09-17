@@ -6,7 +6,7 @@ import {
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { 
-  Filter, Layers, ShieldAlert, ArrowRight
+  Filter, Layers, ShieldAlert, ArrowRight, Search
 } from 'lucide-react';
 import { mockProjects } from '@/data/mockProjects';
 import { formatCurrency } from '@/lib/utils';
@@ -60,12 +60,16 @@ export default function GISMap() {
   const [statusFilter, setStatusFilter] = useState('');
   const [showOverlaps, setShowOverlaps] = useState(false);
   const [markerLimit, setMarkerLimit] = useState('1000');
+  const [search, setSearch] = useState('');
 
   const schemes = Array.from(new Set(mockProjects.map(p => p.scheme)));
   const statuses = Array.from(new Set(mockProjects.map(p => p.status)));
 
   const filteredProjects = useMemo(() => {
     let result = [...mockProjects];
+    if (search) {
+      result = result.filter(p => p.id.toLowerCase().includes(search.toLowerCase()) || p.name.toLowerCase().includes(search.toLowerCase()) || p.contractor.toLowerCase().includes(search.toLowerCase()));
+    }
     if (schemeFilter) result = result.filter(p => p.scheme === schemeFilter);
     if (statusFilter) result = result.filter(p => p.status === statusFilter);
     if (riskFilter) {
@@ -79,7 +83,7 @@ export default function GISMap() {
       result = result.slice(0, parseInt(markerLimit));
     }
     return result;
-  }, [schemeFilter, riskFilter, statusFilter, markerLimit]);
+  }, [schemeFilter, riskFilter, statusFilter, markerLimit, search]);
 
   return (
     <div className="h-full flex flex-col md:flex-row border-y border-hairline -mx-6 -my-6 bg-surface">
@@ -93,6 +97,17 @@ export default function GISMap() {
         </div>
         
         <div className="p-4 flex-1 overflow-y-auto space-y-6">
+          <div className="relative">
+            <Search className="absolute left-2.5 top-1.5 h-4 w-4 text-text-muted" />
+            <input 
+              type="text"
+              placeholder="Search ID, name, contractor..."
+              className="flex h-8 w-full rounded-[2px] border border-hairline bg-surface-raised pl-8 pr-2.5 py-1 text-[13px] text-text-primary focus:outline-none focus:border-primary"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          
           <div className="space-y-4">
             <Select label="Scheme" placeholder="All Schemes" options={schemes} value={schemeFilter} onChange={setSchemeFilter} />
             <Select label="Status" placeholder="All Statuses" options={statuses} value={statusFilter} onChange={setStatusFilter} />

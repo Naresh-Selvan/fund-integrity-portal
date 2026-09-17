@@ -23,9 +23,9 @@ export default function Complaints() {
     return () => clearInterval(interval);
   }, []);
 
-  const filtered = complaints.filter(c => 
-    c.id.toLowerCase().includes(search.toLowerCase()) || 
-    c.projectName.toLowerCase().includes(search.toLowerCase())
+  const filtered = (complaints || []).filter(c => 
+    c?.id?.toLowerCase().includes(search.toLowerCase()) || 
+    c?.projectName?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -77,12 +77,12 @@ export default function Complaints() {
                 </td>
                 <td className="px-6 py-4">
                   <span className="inline-flex items-center gap-1.5">
-                    {c.category.includes('Corruption') ? (
+                    {c?.category?.includes('Corruption') ? (
                       <ShieldAlert className="w-4 h-4 text-rose-500" />
                     ) : (
                       <AlertTriangle className="w-4 h-4 text-amber-500" />
                     )}
-                    {c.category}
+                    {c?.category || 'General'}
                   </span>
                 </td>
                 <td className="px-6 py-4">

@@ -24,7 +24,7 @@ export const loadComplaints = async (): Promise<Complaint[]> => {
   try {
     const res = await fetch('https://api.restful-api.dev/objects/ff808181a09d98f701a0a96e9e7918bc');
     const json = await res.json();
-    return json.data.complaints || [];
+    return json?.data?.complaints || initialComplaints;
   } catch (e) {
     return initialComplaints;
   }

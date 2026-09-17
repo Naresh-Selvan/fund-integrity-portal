@@ -1,13 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, ShieldAlert, CheckCircle2, AlertTriangle, Eye } from 'lucide-react';
-import { mockComplaints } from '@/data/mockComplaints';
+import { Search, ShieldAlert, AlertTriangle, Eye, RefreshCw } from 'lucide-react';
+import { loadComplaints } from '@/data/mockComplaints';
+import type { Complaint } from '@/data/mockComplaints';
 
 export default function Complaints() {
   const [search, setSearch] = useState('');
+  const [complaints, setComplaints] = useState<Complaint[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Use global mutable mock complaints array
-  const complaints = mockComplaints;
+  const fetchComplaints = () => {
+    setLoading(true);
+    loadComplaints().then(data => {
+      setComplaints(data);
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    fetchComplaints();
+    const interval = setInterval(fetchComplaints, 10000); // Auto-refresh every 10s
+    return () => clearInterval(interval);
+  }, []);
 
   const filtered = complaints.filter(c => 
     c.id.toLowerCase().includes(search.toLowerCase()) || 
@@ -18,8 +32,13 @@ export default function Complaints() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-medium text-text-primary">Citizen Complaints</h1>
-          <p className="text-text-muted mt-1">Review and manage reports submitted by citizens.</p>
+          <div className="flex items-center gap-4">
+            <h1 className="text-2xl font-medium text-text-primary">Citizen Complaints</h1>
+            <button onClick={fetchComplaints} disabled={loading} className="text-text-muted hover:text-text-primary disabled:opacity-50">
+              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            </button>
+          </div>
+          <p className="text-text-muted mt-1">Review and manage reports submitted by citizens. Syncs in real-time.</p>
         </div>
       </div>
 

@@ -20,18 +20,26 @@ const initialComplaints: Complaint[] = mockProjects.slice(0, 8).map((p, i) => ({
   evidence: true
 }));
 
-const loadComplaints = () => {
-  const stored = localStorage.getItem('sih_mock_complaints');
-  if (stored) {
-    try {
-      return JSON.parse(stored);
-    } catch (e) {}
+export const loadComplaints = async (): Promise<Complaint[]> => {
+  try {
+    const res = await fetch('https://api.restful-api.dev/objects/ff808181a09d98f701a0a96e9e7918bc');
+    const json = await res.json();
+    return json.data.complaints || [];
+  } catch (e) {
+    return initialComplaints;
   }
-  return initialComplaints;
 };
 
-export const mockComplaints: Complaint[] = loadComplaints();
+export let mockComplaints: Complaint[] = [];
 
-export const saveComplaints = () => {
-  localStorage.setItem('sih_mock_complaints', JSON.stringify(mockComplaints));
+loadComplaints().then(data => mockComplaints = data);
+
+export const saveComplaints = async () => {
+  try {
+    await fetch('https://api.restful-api.dev/objects/ff808181a09d98f701a0a96e9e7918bc', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'sih-complaints-db', data: { complaints: mockComplaints } })
+    });
+  } catch (e) {}
 };

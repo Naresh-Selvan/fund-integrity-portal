@@ -1,4 +1,5 @@
 import type { Project } from '../data/mockProjects';
+import mlInsights from '../data/ml_insights.json';
 
 export interface RiskFactor {
   label: string;
@@ -11,6 +12,29 @@ export function computeRisk(
 ): { score: number; factors: RiskFactor[] } {
   const factors: RiskFactor[] = [];
   const today = new Date();
+  
+  // 🧠 ML Isolation Forest Model Insights
+  const mlData = (mlInsights as Record<string, any>)[project.id];
+  if (mlData && mlData.is_anomaly) {
+    if (mlData.ai_insights.length > 0) {
+      mlData.ai_insights.forEach((insight: string) => {
+        factors.push({
+          label: `🧠 ${insight}`,
+          points: Math.max(25, Math.round(mlData.ml_risk_score / mlData.ai_insights.length)),
+        });
+      });
+    } else {
+      factors.push({
+        label: `🧠 ML Model detected statistical anomaly (Risk: ${mlData.ml_risk_score}%)`,
+        points: mlData.ml_risk_score,
+      });
+    }
+  } else if (mlData && mlData.ml_risk_score > 40) {
+     factors.push({
+        label: `🧠 ML Model predicts elevated outlier risk`,
+        points: Math.round(mlData.ml_risk_score / 2)
+     });
+  }
   
   // Cost Outlier
   const schemeProjects = allProjects.filter((p) => p.scheme === project.scheme);

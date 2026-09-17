@@ -3,7 +3,7 @@ import { Outlet, Link, useParams, useSearchParams } from 'react-router-dom';
 import { 
   Search, MapPin, Building2, Camera, Mic, 
   Map as MapIcon, ChevronRight, AlertTriangle, ShieldCheck,
-  UploadCloud, CheckCircle2, Navigation, IndianRupee
+  CheckCircle2, Navigation, IndianRupee
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';

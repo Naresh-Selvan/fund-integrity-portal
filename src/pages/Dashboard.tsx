@@ -80,14 +80,17 @@ export default function Dashboard() {
     ];
   }, []);
 
-  const highRiskProjects = [...mockProjects]
-    .sort((a, b) => b.riskScore - a.riskScore)
-    .slice(0, 5)
-    .map(p => ({
-      ...p,
-      assignedOfficer: 'S. K. Sharma',
-      lastUpdated: new Date(new Date().getTime() - Math.random() * 10000000000).toISOString()
-    }));
+  const highRiskProjects = useMemo(() => {
+    return [...mockProjects]
+      .sort((a, b) => b.riskScore - a.riskScore)
+      .slice(0, 5)
+      .map(p => ({
+        ...p,
+        assignedOfficer: 'S. K. Sharma',
+        // Deterministic offset based on ID length to prevent flickering
+        lastUpdated: new Date(new Date().getTime() - (p.id.length * 1000000000)).toISOString()
+      }));
+  }, []);
 
   // --- Animated Values ---
   const animatedHighRisk = useCountUp(riskDistribution[2].value);
